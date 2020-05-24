@@ -7,7 +7,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 
-class ArtificialArgumentKNN(KNeighborsClassifier):
+class SHArtArgKNNClassifier(KNeighborsClassifier):
 
     def my_aayrtifi(self, kneighbor, X, y, Xtest=np.array([]), ytest=np.array([])):
         # to ensure whether the test arrs is given
