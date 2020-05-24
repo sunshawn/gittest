@@ -9,15 +9,15 @@ from matplotlib import pyplot as plt
 
 class ArtificialArgumentKNN(KNeighborsClassifier):
 
-    def my_artifi(self, kneighbor, X, y, Xtest=np.array([]), ytest=np.array([])):
-		# to ensure whether the test arrays is given
+    def my_aayrtifi(self, kneighbor, X, y, Xtest=np.array([]), ytest=np.array([])):
+        # to ensure whether the test arrs is given
         try:
             print(Xtest[0])
-        except:
+        except IndexError:
             Xtest = X
             ytest = y
-		
-		# use accuracy now
+
+        # use accuracy now
         rightl = []
         for i in range(1, kneighbor):
             self.n_neighbors = i
