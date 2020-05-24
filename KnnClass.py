@@ -1,4 +1,6 @@
-# hello test
+# Program created by sunshawn
+# date: 2020/5/24
+
 
 from sklearn.neighbors import KNeighborsClassifier
 import numpy as np
@@ -24,10 +26,11 @@ class ArtificialArgumentKNN(KNeighborsClassifier):
         return rightl.index(max(rightl)) + 1, max(rightl)
 
 
-myknn = ArtificialArgumentKNN()
-x = np.array([[1, 3], [2, 8], [3, 5], [4, -1], [5, 5]])
-y = np.array([1, 0, 0, 1, 0])
-xp = np.array([[1, 3]])
-yp = np.array([1])
-k, right = myknn.my_artifi(3, x, y, xp, yp)
-print(k, right)
+if __name__ == '__main__':
+    myknn = ArtificialArgumentKNN()
+    x = np.array([[1, 3], [2, 8], [3, 5], [4, -1], [5, 5]])
+    y = np.array([1, 0, 0, 1, 0])
+    xp = np.array([[1, 3]])
+    yp = np.array([1])
+    k, right = myknn.my_artifi(3, x, y, xp, yp)
+    print(k, right)
