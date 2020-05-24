@@ -9,7 +9,7 @@ from matplotlib import pyplot as plt
 
 class SHArtArgKNNClassifier(KNeighborsClassifier):
 
-    def my_aayrtifi(self, kneighbor, X, y, Xtest=np.array([]), ytest=np.array([])):
+    def my_artifi(self, kneighbor, X, y, Xtest=np.array([]), ytest=np.array([])):
         # to ensure whether the test arrs is given
         try:
             print(Xtest[0])
@@ -29,12 +29,16 @@ class SHArtArgKNNClassifier(KNeighborsClassifier):
         return rightl.index(max(rightl)) + 1, max(rightl)
 
 
-# test the code
-if __name__ == '__main__':
-    myknn = ArtificialArgumentKNN()
+def main():
+    myknn = SHArtArgKNNClassifier()
     x = np.array([[1, 3], [2, 8], [3, 5], [4, -1], [5, 5]])
     y = np.array([1, 0, 0, 1, 0])
     xp = np.array([[1, 3]])
     yp = np.array([1])
     k, right = myknn.my_artifi(3, x, y, xp, yp)
     print(k, right)
+
+
+# test the code
+if __name__ == '__main__':
+    main()
