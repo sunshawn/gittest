@@ -1,5 +1,5 @@
 # Program created by sunshawn
-# date: 2020/5/24
+# date: 2020/6/1
 
 
 from sklearn.neighbors import KNeighborsClassifier
@@ -35,21 +35,30 @@ class SHArtArgKNNClassifier(KNeighborsClassifier):
             Xtest = X
             ytest = y
 
-        # FixMe: use accuracy now
         rightl = []
         for i in range(1, kneighbor):
             self.n_neighbors = i
             self.fit(X, y)
             predict = self.predict(Xtest)
 
-            if standard == 'not_binary':
+            if standard == 'not_binary':  # the question is not a binary one
                 rights = (predict == ytest).mean()  # the calculation of accuracy,
                 # equals rights = (predict == ytest).sum() / len(predict),
                 # that's because python can calculate True as 1 and False 0
                 rightl.append(rights)
-            elif standard == 'accuracy':
-                pass
-            # TODO: to show the procedure
+            else:  # the question is a binary one
+                tn, fp, fn, tp = confusion_matrix(ytest, predict).flatten()  # get the confusion matrix to calculate
+                #  the following data
+
+                if standard == 'accuracy':
+                    rightl.append(some_functions.accuracy(tp, tn, fp, fn))
+                elif standard == 'precision':
+                    rightl.append(some_functions.precision(tp, fp))
+                elif standard == 'recall':
+                    rightl.append(some_functions.recall(tp, fn))
+                else:
+                    rightl.append(some_functions.f1(tp, fp, tn))
+            print(str(i / kneighbor * 100) + '%')
 
         plt.plot(np.array(range(1, kneighbor)), np.array(rightl))
         return rightl.index(max(rightl)) + 1, max(rightl)
