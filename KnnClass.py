@@ -5,6 +5,8 @@
 from sklearn.neighbors import KNeighborsClassifier
 import numpy as np
 from matplotlib import pyplot as plt
+from sklearn.metrics import confusion_matrix
+import some_functions
 
 
 class SHArtArgKNNClassifier(KNeighborsClassifier):
@@ -14,13 +16,15 @@ class SHArtArgKNNClassifier(KNeighborsClassifier):
     when the accuracy or precision or recall is the most it returns it.
     """
 
-    def my_artifi(self, kneighbor, X, y, Xtest=np.array([]), ytest=np.array([])):
+    def my_artifi(self, kneighbor, X, y, Xtest=np.array([]), ytest=np.array([]), standard='not_binary'):
         """
         :param kneighbor: the k
         :param X: the independent var of training set
         :param y: the dependent var of training set
         :param Xtest: the independent var of test set
         :param ytest: the dependent var of test set
+        :param standard: the evaluation standard of the classifying.
+        can use not_binary, accuracy, precision, recall & f1
         :return: k and it's state when the state is utmost
         """
 
@@ -37,10 +41,14 @@ class SHArtArgKNNClassifier(KNeighborsClassifier):
             self.n_neighbors = i
             self.fit(X, y)
             predict = self.predict(Xtest)
-            rights = (predict == ytest).mean()  # the calculation of accuracy,
-            # equals rights = (predict == ytest).sum() / len(predict),
-            # that's because python can calculate True as 1 and False 0
-            rightl.append(rights)
+
+            if standard == 'not_binary':
+                rights = (predict == ytest).mean()  # the calculation of accuracy,
+                # equals rights = (predict == ytest).sum() / len(predict),
+                # that's because python can calculate True as 1 and False 0
+                rightl.append(rights)
+            elif standard == 'accuracy':
+                pass
             # TODO: to show the procedure
 
         plt.plot(np.array(range(1, kneighbor)), np.array(rightl))
